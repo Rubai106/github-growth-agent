@@ -1,0 +1,14 @@
+{
+  "name": "github-growth-agent",
+  "version": "1.0.0",
+  "description": "GitHub repo & profile analyzer with score, suggestions, and shareable report cards",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "start:server": "npm start --prefix server",
+    "start:client": "npm run dev --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

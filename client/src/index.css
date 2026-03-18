@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  body {
+    background-color: #080a10;
+    color: #e8eaf0;
+    font-family: 'Syne', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f1117;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2d40;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3d54;
+  }
+}
+
+@layer components {
+  /* ── Card ── */
+  .card {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm;
+  }
+
+  /* ── Input ── */
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white
+    placeholder-white/30 outline-none transition-all duration-200
+    focus:border-brand-500/60 focus:bg-white/[0.07] focus:ring-2 focus:ring-brand-500/20;
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-3
+    text-sm font-semibold text-white transition-all duration-200
+    hover:bg-brand-500 hover:shadow-lg hover:shadow-brand-600/30
+    active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10
+    px-4 py-2.5 text-sm font-medium text-white/70 transition-all duration-200
+    hover:border-white/20 hover:bg-white/[0.05] hover:text-white active:scale-[0.98];
+  }
+
+  /* ── Badge ── */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .badge-green {
+    @apply badge bg-emerald-500/15 text-emerald-400;
+  }
+  .badge-yellow {
+    @apply badge bg-amber-500/15 text-amber-400;
+  }
+  .badge-red {
+    @apply badge bg-red-500/15 text-red-400;
+  }
+  .badge-blue {
+    @apply badge bg-brand-500/15 text-brand-400;
+  }
+  .badge-gray {
+    @apply badge bg-white/5 text-white/50;
+  }
+
+  /* ── Section headings ── */
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-white;
+  }
+  .section-sub {
+    @apply text-sm text-white/50;
+  }
+
+  /* ── Suggestion type styles ── */
+  .suggestion-critical {
+    @apply border-l-2 border-red-500 bg-red-500/5 pl-4;
+  }
+  .suggestion-important {
+    @apply border-l-2 border-amber-500 bg-amber-500/5 pl-4;
+  }
+  .suggestion-tip {
+    @apply border-l-2 border-brand-500 bg-brand-500/5 pl-4;
+  }
+
+  /* ── Stat block ── */
+  .stat-block {
+    @apply flex flex-col gap-0.5 rounded-xl border border-white/[0.06] bg-white/[0.03] p-4;
+  }
+}
+
+/* ── Fade-in animation ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.4s ease both;
+}
+
+/* Stagger children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+.stagger > *:nth-child(6) { animation-delay: 300ms; }
