@@ -1,142 +1,171 @@
 # GitHub Growth Agent
 
-A full-stack MERN tool to analyze GitHub repositories and profiles, generate professional READMEs, and get shareable report cards — **100% free, no paid APIs required**.
+> Analyze GitHub repositories and profiles, generate professional READMEs, and create shareable report cards — all completely free.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-v18+-green.svg)](https://nodejs.org)
+[![React](https://img.shields.io/badge/React-18+-61dafb.svg)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-5+-646cff.svg)](https://vitejs.dev)
 
 ## ✨ Features
 
-| Feature | Details |
-|---|---|
-| **Repo Analyzer** | Score any public repo across Documentation, Community, Activity & Popularity |
-| **Profile Analyzer** | Analyze any GitHub profile with 4-dimension scoring |
-| **README Generator** | Template-based generator — fill a form, get a complete README.md |
-| **Report Cards** | Visual report card for any repo or profile — downloadable as PNG |
+- **Repository Analyzer** – Score any public repository on documentation, community, activity, and popularity
+- **Profile Analyzer** – Analyze GitHub profiles with completeness, repositories, community, and longevity scoring  
+- **README Generator** – Create professional README files from an interactive template
+- **Report Cards** – Generate beautiful, downloadable report cards as PNG images
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18 + Vite + Tailwind CSS + React Router v6
-- **Backend**: Node.js + Express
-- **API**: GitHub public REST API (free, no auth needed for public repos)
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 18 + Vite + Tailwind CSS + React Router v6 |
+| Backend | Node.js + Express |
+| Data Source | GitHub REST API (free, no authentication required for public repos) |
+| Deployment | Vercel (frontend + serverless API) |
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js v18+
-- npm v8+
+- Node.js v18 or higher
+- npm v8 or higher
 
-### 1. Install dependencies
+### Local Development
 
 ```bash
-# Install root dependencies (concurrently)
+# 1. Install all dependencies
 npm install
 
-# Install server and client dependencies
-npm install --prefix server
-npm install --prefix client
-```
-
-### 2. Configure environment (optional but recommended)
-
-```bash
+# 2. (Optional) Configure GitHub token for higher rate limits
 cp .env.example server/.env
-```
+# Edit server/.env and add your GitHub token
 
-Open `server/.env` and optionally add a GitHub token:
-```
-GITHUB_TOKEN=ghp_your_token_here
-PORT=5000
-```
-
-> **Without token**: 60 requests/hour (unauthenticated GitHub API limit)  
-> **With token**: 5,000 requests/hour — get one free at [github.com/settings/tokens](https://github.com/settings/tokens) (no scopes needed for public repos)
-
-### 3. Run the project
-
-```bash
-# Start both frontend and backend together
+# 3. Start development server
 npm run dev
 ```
 
-- 🖥️ **Frontend**: http://localhost:5173
-- ⚙️ **Backend**: http://localhost:5000
-- 🔍 **Health check**: http://localhost:5000/api/health
+Once running:
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5000  
+- **Health Check**: http://localhost:5000/api/health
 
-## 📁 Project Structure
+### Deployment
 
-```
-github-growth-agent/
-├── package.json              # Root — runs both with concurrently
-├── .env.example
-│
-├── server/                   # Node.js + Express backend
-│   ├── server.js
-│   └── src/
-│       ├── app.js            # Express setup, routes, CORS
-│       ├── config/
-│       │   ├── index.js      # Env config
-│       │   └── github.js     # Axios client for GitHub API
-│       ├── middlewares/
-│       │   ├── asyncHandler.js
-│       │   └── errorHandler.js
-│       └── modules/
-│           ├── repo/         # Repo analyzer (route + controller + service)
-│           ├── profile/      # Profile analyzer
-│           └── readme/       # README generator
-│
-└── client/                   # React + Vite frontend
-    ├── index.html
-    ├── vite.config.js        # Proxies /api → localhost:5000
-    └── src/
-        ├── App.jsx           # React Router routes
-        ├── index.css         # Tailwind + custom classes
-        ├── services/api.js   # Axios client
-        ├── components/
-        │   ├── layout/       # Layout, Sidebar
-        │   └── ui/           # ScoreCircle, ReportCard, SuggestionList
-        └── pages/
-            ├── Dashboard.jsx
-            ├── RepoAnalyzer.jsx
-            ├── ReadmeGenerator.jsx
-            └── ProfileAnalyzer.jsx
-```
+Deploy to Vercel with a single click:
 
-## 🔌 API Endpoints
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Rubai106/github-growth-agent)
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/health` | Server health check |
-| `POST` | `/api/repo/analyze` | Analyze a repo `{ repoUrl }` |
-| `GET` | `/api/profile/:username` | Analyze a GitHub profile |
-| `POST` | `/api/readme/generate` | Generate a README `{ projectName, ... }` |
+Or follow the [detailed deployment guide](VERCEL_DEPLOYMENT.md).
 
-## 🎯 Scoring System
-
-### Repo Score (0–100)
-| Category | Max | Criteria |
-|---|---|---|
-| Documentation | 30 | README present, description, homepage |
-| Community | 25 | License, topics/tags, wiki |
-| Activity | 25 | Days since last update, not archived |
-| Popularity | 20 | Stars (log scale), forks (log scale) |
-
-### Profile Score (0–100)
-| Category | Max | Criteria |
-|---|---|---|
-| Completeness | 25 | Name, bio, company, blog, location, Twitter |
-| Repositories | 25 | Repo count, total stars earned |
-| Community | 25 | Followers, follower/following ratio |
-| Longevity | 25 | Account age in years |
-
-## 📦 Run separately
+### Installation & Build Commands
 
 ```bash
-# Backend only
+# Install server and client dependencies separately
+npm install --prefix server
+npm install --prefix client
+
+# Build frontend only
+npm run build --prefix client
+
+# Run backend only
 npm run start:server
 
-# Frontend only
+# Run frontend only
 npm run start:client
 ```
 
-## License
+## � Project Structure
 
-MIT
+```
+github-growth-agent/
+├── api/                      # Vercel serverless functions
+├── client/                   # React frontend (Vite)
+│   ├── src/
+│   │   ├── pages/           # Dashboard, Analyzer pages
+│   │   ├── components/      # UI components & layout
+│   │   └── services/        # API client
+│   └── vite.config.js
+│
+├── server/                   # Node.js + Express backend
+│   └── src/
+│       ├── config/          # Environment & GitHub API config
+│       ├── middlewares/     # Error handling, async wrapper
+│       ├── modules/         # Feature modules (repo, profile, readme)
+│       └── app.js           # Express app & routes
+│
+├── vercel.json              # Vercel deployment config
+└── VERCEL_DEPLOYMENT.md     # Deployment guide
+```
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| `GET` | `/api/health` | Check server status |
+| `POST` | `/api/repo/analyze` | Analyze repository scoring |
+| `GET` | `/api/profile/:username` | Analyze GitHub profile |
+| `POST` | `/api/readme/generate` | Generate README from template |
+
+## 📊 Scoring System
+
+### Repository Score (0–100)
+
+| Category | Weight | Criteria |
+|----------|--------|----------|
+| Documentation | 30% | README, description, homepage |
+| Community | 25% | License, topics, wiki |
+| Activity | 25% | Days since last update, not archived |
+| Popularity | 20% | Stars & forks (logarithmic scale) |
+
+### Profile Score (0–100)
+
+| Category | Weight | Criteria |
+|----------|--------|----------|
+| Completeness | 25% | Name, bio, company, location, blog, social links |
+| Repositories | 25% | Count & total stars earned |
+| Community | 25% | Followers & following ratio |
+| Longevity | 25% | Account age in years |
+
+## 🔐 Environment Variables
+
+### Local Development
+
+Create `server/.env`:
+
+```env
+GITHUB_TOKEN=                    # Optional: 5000 requests/hour (vs 60 without)
+PORT=5000                         # Server port
+NODE_ENV=development
+ALLOWED_ORIGINS=http://localhost:5173
+```
+
+**Get a GitHub Token**: https://github.com/settings/tokens (no scopes needed)
+
+### Production (Vercel)
+
+Set environment variables in Vercel project settings (Settings → Environment Variables)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [React](https://react.dev) and [Vite](https://vitejs.dev)
+- Styled with [Tailwind CSS](https://tailwindcss.com)
+- Powered by [GitHub REST API](https://docs.github.com/rest)
+- Deployed on [Vercel](https://vercel.com)
+
+## 📧 Support
+
+For issues, questions, or suggestions, please open an [issue](https://github.com/Rubai106/github-growth-agent/issues) on GitHub.
